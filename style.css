@@ -1,0 +1,103 @@
+
+
+
+#outer {
+    width: 75%;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.536), 0 10px 20px 0 rgba(0, 0, 0, 0.536);
+    border-radius: 20px;
+    
+}
+
+#main {
+    float: left;
+    position: relative;
+    text-align: center;
+    height: 500px;
+}
+
+
+#video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+#sub{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#locName {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* background-color: blue; */
+    padding: 15px 0;
+    color: white;
+}
+
+#date {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    font-weight: bold;
+    /* color: yellow; */
+
+
+}
+
+#temp {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: white;
+
+
+}
+
+#inputCityname{
+    background-color: rgba(0, 0, 0, 0.251);
+    color: rgb(255, 255, 255);
+    font-size: larger;
+    border: none;
+    margin-right: 5px;
+
+
+}
+
+
+
+@media(max-width:991px) {
+    #main {
+        height: 300px;
+    }
+
+    #locationName {
+        color: red;
+    }
+    #video{
+        
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+
+
+    }
+    #sub{
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+
+    }
+
+    @media(max-width:698px){
+
+    }
+}

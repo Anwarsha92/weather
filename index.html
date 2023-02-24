@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Weather</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+<body class="bg-light">
+
+    <div id="outer" class="container  mt-5">
+        <div class="row">
+            <div id="main" class="col col-12 col-lg-7  text-dark ">
+
+                <video id="video" autoplay muted loop>
+                    <source src="./images/Pexels Videos 1893623.mp4" type="video/mp4" />
+                </video>
+
+                <div class="mt-3 container w-75 d-flex">
+                    <input type="search" id="inputCityname" class="form-control" placeholder="Enter city name">
+                    <button onclick="showWeather()" class="btn btn-secondary" type="button"><i class="las la-search"></i></button>
+                    </div>
+
+                <div id="date" class="pt-3"><h6>Date</h6></div>
+
+                <div id="temp"><h2>&#8451;</h2></div>
+                <div id="locName"><h1>Loading...</h1></div>
+            </div>
+            <div id="sub" class="col col-12 col-lg-5 bg-dark text-white" style="height: 500px;">
+                <div class="mt-3">
+                    <h4>Weather details</h2>
+                        <hr>
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Humidity</p></div>
+                        <div id="hum" class="col col-6"><p>Loading...</p></div>
+                        </div>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Pressure</p></div>
+                        <div id="pre" class="col col-6"><p>Loading...</p></div>
+                        </div>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Wind speed</p></div>
+                        <div id="wins" class="col col-6"><p>Loading...</p></div>
+                        </div>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Description</p></div>
+                        <div id="descr" class="col col-6"><p>Loading...</p></div>
+                        </div>
+                        <br>
+    
+                        <h4>Location details</h4>
+                        <hr>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Lattitude</p></div>
+                        <div id="lati" class="col col-6"><p>Loading...</p></div>
+                        </div>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Longitude</p></div>
+                        <div id="longi" class="col col-6"><p>Loading...</p></div>
+                        </div>
+    
+                        <div class="d-flex">
+                            <div  class="col col-6"><p>Country</p></div>
+                        <div id="coun" class="col col-6"><p>Loading...</p></div>
+                        </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+  
+    
+</body>
+<script>
+
+function currentTime() {
+            var curTime = new Date();
+            document.getElementById("date").innerHTML = curTime.toLocaleString()
+                // curTime.getHours() + ':' +
+                // curTime.getMinutes() + ':' +
+                // curTime.getSeconds();
+            setTimeout(currentTime, 1000);
+        }
+
+        currentTime();
+
+    function showWeather(){
+        locationName=inputCityname.value
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=b41ec3be35c7dac8aabbc21ba253137a`)
+        .then(data=>data.json()).then(data=>displayData(data))
+    }
+
+
+    function displayData(showWeather){
+        locationName=showWeather.name
+        humidity=showWeather.main.humidity
+        pressure=showWeather.main.pressure
+        temperature=showWeather.main.temp-273.15
+        winspeed=showWeather.wind.speed
+        descript=showWeather.weather[0].description
+        lattit=showWeather.coord.lat
+        logit=showWeather.coord.lon
+        countr=showWeather.sys.country
+
+        locName.innerHTML=`<h1>${ locationName}</h1>`
+        temp.innerHTML=`<h2 style="font-size:100px;">${parseInt (temperature)}&#8451;</h2>`
+        hum.innerHTML=`<p>${ humidity}</p>`
+        pre.innerHTML=`<p>${ pressure}</p>`
+        wins.innerHTML=`<p>${ winspeed}</p>`
+        descr.innerHTML=`<p>${ descript}</p>`
+        lati.innerHTML=`<p>${ lattit}</p>`
+        longi.innerHTML=`<p>${ logit}</p>`
+        coun.innerHTML=`<p>${ countr}</p>`
+
+
+    }
+    
+</script>
+</html>
